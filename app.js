@@ -1,6 +1,7 @@
+// Initialize Contentful client with your space ID and access token
 const client = contentful.createClient({
-    space: 'your_space_id',
-    accessToken: 'your_access_token'
+    space: 'etv5xv9is75t',
+    accessToken: 'OZDk5-dsminXLHc_w_PcGmEVOTsjpviYVsNEOsZ13OA' // Using the Content Delivery API token
   });
   
   client.getEntries()
