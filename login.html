@@ -31,13 +31,23 @@
     </footer>
 
     <script>
+        // Array of permitted username/password combinations
+        const validLogins = [
+            { username: 'user1', password: 'password1' },
+            { username: 'user2', password: 'password2' },
+            { username: 'admin', password: 'admin123' },
+            { username: 'testuser', password: 'testpass' }
+        ];
+
         document.getElementById('login-form').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent the form from submitting normally
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            // Simple login validation
-            if (username === 'user' && password === 'password') {
+            // Check if the entered username and password match any valid combination
+            const isValidLogin = validLogins.some(login => login.username === username && login.password === password);
+
+            if (isValidLogin) {
                 document.getElementById('login-message').innerText = 'Login successful!';
                 // Redirect to the main page after a short delay
                 setTimeout(() => {
