@@ -1,48 +1,13 @@
-// Sample product data with categories
-const products = [
-    {
-        id: 1,
-        name: "Smartphone",
-        price: 299.99,
-        image: "https://via.placeholder.com/150",
-        category: "electronics"
-    },
-    {
-        id: 2,
-        name: "T-Shirt",
-        price: 19.99,
-        image: "https://via.placeholder.com/150",
-        category: "clothing"
-    },
-    {
-        id: 3,
-        name: "Laptop",
-        price: 899.99,
-        image: "https://via.placeholder.com/150",
-        category: "electronics"
-    },
-    {
-        id: 4,
-        name: "Sneakers",
-        price: 49.99,
-        image: "https://via.placeholder.com/150",
-        category: "clothing"
-    },
-    {
-        id: 5,
-        name: "Watch",
-        price: 99.99,
-        image: "https://via.placeholder.com/150",
-        category: "accessories"
-    },
-    {
-        id: 6,
-        name: "Headphones",
-        price: 89.99,
-        image: "https://via.placeholder.com/150",
-        category: "electronics"
-    }
-];
+// Initialize products array
+let products = [];
+
+// Function to load products from JSON
+async function loadProducts() {
+    const response = await fetch('products.json');
+    products = await response.json();
+    displayProducts(products);
+    displayFeaturedProducts();
+}
 
 // Function to display products
 function displayProducts(filteredProducts) {
@@ -71,13 +36,11 @@ function filterProducts() {
     displayProducts(filteredProducts);
 }
 
-// Call the function to display all products on page load
-displayProducts(products);
-
 // Function to display featured products (first 3 products as an example)
 function displayFeaturedProducts() {
     const container = document.getElementById('featured-container');
     const featuredProducts = products.slice(0, 3); // Just an example, take first 3 products
+    container.innerHTML = ''; // Clear existing featured products
     featuredProducts.forEach(product => {
         const productCard = document.createElement('div');
         productCard.classList.add('product-card');
@@ -91,5 +54,5 @@ function displayFeaturedProducts() {
     });
 }
 
-// Call the function to display featured products
-displayFeaturedProducts();
+// Call loadProducts on page load
+window.onload = loadProducts;
