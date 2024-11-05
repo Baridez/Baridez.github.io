@@ -1,0 +1,28 @@
+name: Test Login Page
+
+on: 
+  push: 
+    branches:
+      - main  # Adjust if your main branch has a different name
+  pull_request:
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # You can specify the version you want
+
+      - name: Install dependencies
+        run: npm install cypress --save-dev  # Ensure Cypress is installed
+
+      - name: Run Cypress tests
+        run: npx cypress run
+        env:
+          # Set any environment variables needed for Cypress here (if any)
